@@ -5,13 +5,14 @@ float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
 float leftEyeX, leftEyeY, rightEyeX, rightEyeY, eyeDiameter;
 float noseX1, noseY1, noseX2, noseY2, noseX3, noseY3;
 float mouthX1, mouthY1, mouthX2, mouthY2, mouthOpen, mouthReset;
+float measleX, measleY, measleDiameter;
 //
 void setup() {
   fullScreen();
   //size();
   appWidth = width;
   appHeight = height;
-  int smallerDimension = (appWidth >= appHeight) ? appHeight : appWidth ;
+  int smallerDimension = (appWidth >= appHeight) ? appHeight : appWidth;
   println("Smaller Dimension: "+ smallerDimension);
   //
   //Population
@@ -19,10 +20,15 @@ void setup() {
   faceY = appHeight*1/2;
   faceDiameter = smallerDimension;
   //
-  leftEyeX = backgroundX+smallerDimension*6/8;
+  backgroundX = faceX - faceDiameter*1/2;
+  backgroundY = faceY - faceDiameter*1/2;
+  backgroundWidth = faceDiameter;
+  backgroundHeight = faceDiameter;
+  //
+  leftEyeX = backgroundX+smallerDimension*1/4;
   leftEyeY = backgroundY+smallerDimension*1/4;
   //
-  rightEyeX = backgroundX+smallerDimension*2*11/20;
+  rightEyeX = backgroundX+smallerDimension*3/4;
   rightEyeY = leftEyeY;
   //
   eyeDiameter = smallerDimension*1/5;
@@ -31,23 +37,22 @@ void setup() {
   noseY1 = leftEyeY;
   noseX2 = faceX;
   noseY2 = faceY;
-  noseX3 = backgroundX+smallerDimension*2*3/4;
+  noseX3 = backgroundX+smallerDimension*1.5*3/4;
   noseY3 = leftEyeX;
   //
-  mouthX1 = noseX2;
+  mouthX1 = leftEyeX;
   mouthY1 = backgroundY+smallerDimension*3/4;
-  mouthX2 = noseX3;
+  mouthX2 = rightEyeX;
   mouthY2 = mouthY1;
   //
-  mouthOpen = smallerDimension*1/4;
+  mouthOpen = smallerDimension*1/10;
   mouthReset = smallerDimension/smallerDimension;
   //
-  //DIVs
+  //measleX = ;
+  //measleY = ;
+  //measleDiameter = ;
   //
-  backgroundX = faceX-faceDiameter*1/2;
-  backgroundY = faceY-faceDiameter*1/2;
-  backgroundWidth = faceDiameter;
-  backgroundHeight = faceDiameter;
+  //DIVs
   //
 } //End setup
 //
@@ -60,6 +65,8 @@ void draw() {
   strokeWeight(mouthOpen); 
   line(mouthX1, mouthY1, mouthX2,mouthY2);
   strokeWeight(mouthReset);
+  //
+  ellipse(measleX, measleY, measleDiameter, measleDiameter );
 } //End draw
 //
 void keyPressed() {
