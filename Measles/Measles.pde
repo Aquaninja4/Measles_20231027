@@ -1,19 +1,20 @@
 //Global Variables
-int appWidth, appHeight;
+int appWidth, appHeight, smallerDimension;
 float faceX, faceY, faceDiameter;
 float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
 float leftEyeX, leftEyeY, rightEyeX, rightEyeY, eyeDiameter;
 float noseX1, noseY1, noseX2, noseY2, noseX3, noseY3;
 float mouthX1, mouthY1, mouthX2, mouthY2, mouthOpen, mouthReset;
 float measleX, measleY, measleDiameter;
+color resetColour = #FFFFFF;
 //
 void setup() {
   fullScreen();
   //size();
   appWidth = width;
   appHeight = height;
-  int smallerDimension = (appWidth >= appHeight) ? appHeight : appWidth;
-  println("Smaller Dimension: "+ smallerDimension);
+  smallerDimension = (appWidth >= appHeight) ? appHeight : appWidth;
+  println("Smaller Dimension: "+ smallerDimension); //Started as local variable
   //
   //Population
   faceX = appWidth*1/2 ;
@@ -48,17 +49,11 @@ void setup() {
   mouthOpen = smallerDimension*1/10;
   mouthReset = smallerDimension/smallerDimension;
   //
-  //measleX = ;
-  //measleY = ;
-  //measleDiameter = ;
+  //
   //
   //DIVs
-  //
-} //End setup
-//
-void draw() {
-  rect(backgroundX, backgroundY, backgroundWidth, backgroundHeight); // ONLY CIRCLE
-  ellipse(faceX, faceY,faceDiameter, faceDiameter);
+  rect(backgroundX, backgroundY, backgroundWidth, backgroundHeight);
+  ellipse( faceX, faceY, faceDiameter, faceDiameter );
   ellipse(leftEyeX, leftEyeY, eyeDiameter,eyeDiameter); //Left Eye
   ellipse(rightEyeX, rightEyeY, eyeDiameter,eyeDiameter); //Right Eye
   triangle(noseX1, noseY1, noseX2,noseY2,noseX3,noseY3);
@@ -66,7 +61,19 @@ void draw() {
   line(mouthX1, mouthY1, mouthX2,mouthY2);
   strokeWeight(mouthReset);
   //
-  ellipse(measleX, measleY, measleDiameter, measleDiameter );
+} //End setup
+//
+void draw() { // ONLY CIRCLE
+  // 
+    color mealseColour = color(255,random(0,84), random(0,40));
+  fill(mealseColour);
+  measleX = random( backgroundX, appWidth );
+  measleY = random(backgroundY, smallerDimension );
+  measleDiameter = random( smallerDimension*1/100, smallerDimension*1/30 );
+  noStroke();
+  ellipse( measleX, measleY, measleDiameter, measleDiameter );
+  stroke(1);
+  fill(resetColour); 
 } //End draw
 //
 void keyPressed() {
