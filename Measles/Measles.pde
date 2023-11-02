@@ -8,6 +8,8 @@ float mouthX1, mouthY1, mouthX2, mouthY2, mouthOpen, mouthReset;
 float measleX, measleY, measleDiameter;
 color resetColour = #FFFFFF;
 Boolean measles = false;
+int measlesSize = 30;
+Boolean measlesControl = false;
 //
 void setup() {
   fullScreen();
@@ -71,8 +73,18 @@ void draw() { // ONLY CIRCLE
     fill(mealseColour);
     measleX = random( backgroundX, backgroundWidth+backgroundX);
     measleY = random(backgroundY, backgroundHeight+backgroundY );
-    measleDiameter = random( smallerDimension*1/100, smallerDimension*1/30 );
+    measleDiameter = random( smallerDimension*1/100, smallerDimension*1/measlesSize );
     noStroke();
+    println(measlesSize);
+        { 
+      if ( measlesSize<15  ) {
+        measlesSize=15;
+      } else if (measlesSize>30) {
+        measlesSize=30;
+      } else {
+        //Empty ELSE
+      }
+    }
   } else {
     fill(mealseColour);
     noStroke();
@@ -81,6 +93,7 @@ void draw() { // ONLY CIRCLE
   ellipse( measleX, measleY, measleDiameter, measleDiameter );
   stroke(1);
   fill(resetColour);
+  //
 } //End draw
 //
 void keyPressed() {
@@ -90,7 +103,12 @@ void keyPressed() {
     } else {
       measles = true;
     }
-  }
+  } 
+    if (key == CODED && keyCode == UP || keyCode == DOWN ) {
+      measlesControl = true;
+      if (key == CODED && keyCode == UP) measlesSize--;
+      if (key == CODED && keyCode == DOWN) measlesSize++ ;
+    }
 } //End keyPressed
 //
 void mousePressed() {
