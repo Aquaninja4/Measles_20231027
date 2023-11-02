@@ -44,7 +44,7 @@ void setup() {
   noseX3 = backgroundWidth+backgroundX;
   noseY3 = leftEyeX;
   //
-  mouthX1 = leftEyeX;
+  mouthX1 = faceX;
   mouthY1 = backgroundY+smallerDimension*3/4;
   mouthX2 = rightEyeX;
   mouthY2 = mouthY1;
@@ -75,8 +75,7 @@ void draw() { // ONLY CIRCLE
     measleY = random(backgroundY, backgroundHeight+backgroundY );
     measleDiameter = random( smallerDimension*1/100, smallerDimension*1/measlesSize );
     noStroke();
-    println(measlesSize);
-        { 
+    {
       if ( measlesSize<15  ) {
         measlesSize=15;
       } else if (measlesSize>30) {
@@ -103,12 +102,12 @@ void keyPressed() {
     } else {
       measles = true;
     }
-  } 
-    if (key == CODED && keyCode == UP || keyCode == DOWN ) {
-      measlesControl = true;
-      if (key == CODED && keyCode == UP) measlesSize--;
-      if (key == CODED && keyCode == DOWN) measlesSize++ ;
-    }
+  }
+  if (key == CODED && keyCode == UP || keyCode == DOWN ) {
+    measlesControl = true;
+    if (key == CODED && keyCode == UP) measlesSize--;
+    if (key == CODED && keyCode == DOWN) measlesSize++ ;
+  }
 } //End keyPressed
 //
 void mousePressed() {
