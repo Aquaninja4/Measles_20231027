@@ -5,7 +5,8 @@ float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
 float leftEyeX, leftEyeY, rightEyeX, rightEyeY, eyeDiameter;
 float noseX1, noseY1, noseX2, noseY2, noseX3, noseY3;
 float mouthX1, mouthY1, mouthX2, mouthY2, mouthOpen, mouthReset;
-float measleX, measleY, measleDiameter;
+float measleX, measleY, measleDiameter, measleRadius;
+float button1X, button1Y, buttonSide;
 color resetColour = #FFFFFF;
 Boolean measles = false;
 int measlesSize = 20;
@@ -58,10 +59,15 @@ void setup() {
   //DIVs
   rect(backgroundX, backgroundY, backgroundWidth, backgroundHeight);
   ellipse( faceX, faceY, faceDiameter, faceDiameter );
+  button1X = backgroundX;
+  button1Y = backgroundY;
+  buttonSide = smallerDimension/2-sqrt(sq(smallerDimension/2)/2);
+  rect(button1X, button1Y, buttonSide, buttonSide);
+  //rect();
   //
 } //End setup
 //
-void draw() { // ONLY CIRCLE
+void draw() {
   //
   triangle(noseX1, noseY1, noseX2, noseY2, noseX3, noseY3);
   ellipse(leftEyeX, leftEyeY, eyeDiameter, eyeDiameter); //Left Eye
@@ -69,12 +75,18 @@ void draw() { // ONLY CIRCLE
   strokeWeight(mouthOpen);
   line(mouthX1, mouthY1, mouthX2, mouthY2);
   strokeWeight(mouthReset);
+  //
   color mealseColour = color(255, random(0, 84), random(0, 103));
   if (measles==true) {
     fill(mealseColour);
     measleDiameter = random( smallerDimension*1/100, smallerDimension*1/measlesSize );
-    measleX = random( backgroundX+(measleDiameter/2), (backgroundWidth+backgroundX)-measleDiameter/2);
-    measleY = random(backgroundY+(measleDiameter/2), (backgroundHeight+backgroundY)-measleDiameter/2 );
+    measleRadius = measleDiameter/2;
+    measleX = random( backgroundX+(measleRadius), (backgroundWidth+backgroundX)-measleRadius);
+    while (measleX < button1X+buttonSide) measleX = random( backgroundX+(measleRadius), (backgroundWidth+backgroundX)-measleRadius);
+    //
+    measleY = random(backgroundY+(measleRadius), (backgroundHeight+backgroundY)-measleRadius );
+    while (measleX < button1Y+buttonSide)measleY = random(backgroundY+(measleRadius), (backgroundHeight+backgroundY)-measleRadius );
+    //
     noStroke();
     {
       if ( measlesSize<15  ) {
