@@ -8,8 +8,9 @@ float mouthX1, mouthY1, mouthX2, mouthY2, mouthOpen, mouthReset;
 float measleX, measleY, measleDiameter;
 color resetColour = #FFFFFF;
 Boolean measles = false;
-int measlesSize = 30;
+int measlesSize = 20;
 Boolean measlesControl = false;
+Boolean nightMode = false;
 //
 void setup() {
   fullScreen();
@@ -71,9 +72,9 @@ void draw() { // ONLY CIRCLE
   color mealseColour = color(255, random(0, 84), random(0, 103));
   if (measles==true) {
     fill(mealseColour);
-    measleX = random( backgroundX, backgroundWidth+backgroundX);
-    measleY = random(backgroundY, backgroundHeight+backgroundY );
     measleDiameter = random( smallerDimension*1/100, smallerDimension*1/measlesSize );
+    measleX = random( backgroundX+(measleDiameter/2), (backgroundWidth+backgroundX)-measleDiameter/2);
+    measleY = random(backgroundY+(measleDiameter/2), (backgroundHeight+backgroundY)-measleDiameter/2 );
     noStroke();
     {
       if ( measlesSize<15  ) {
@@ -96,6 +97,15 @@ void draw() { // ONLY CIRCLE
 } //End draw
 //
 void keyPressed() {
+  if (key == 'n' || key=='N' ) {
+    if (nightMode==true) {
+      nightMode = false;
+    } else {
+      nightMode = true;
+    }
+  }
+
+
   if (key == 'p' || key=='P' ) {
     if (measles==true) {  //Nightmode, basic control is Boolean
       measles = false;
