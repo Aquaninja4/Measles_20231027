@@ -62,7 +62,7 @@ void setup() {
   button1X = backgroundX;
   button1Y = backgroundY;
   buttonSide = smallerDimension/2-sqrt(sq(smallerDimension/2)/2);
-  rect(button1X, button1Y, buttonSide, buttonSide);
+  //rect(button1X, button1Y, buttonSide, buttonSide);
   //rect();
   //
 } //End setup
@@ -85,7 +85,7 @@ void draw() {
     while (measleX < button1X+buttonSide) measleX = random( backgroundX+(measleRadius), (backgroundWidth+backgroundX)-measleRadius);
     //
     measleY = random(backgroundY+(measleRadius), (backgroundHeight+backgroundY)-measleRadius );
-    while (measleX < button1Y+buttonSide)measleY = random(backgroundY+(measleRadius), (backgroundHeight+backgroundY)-measleRadius );
+    while (measleY < button1Y+buttonSide) measleY = random(backgroundY+(measleRadius), (backgroundHeight+backgroundY)-measleRadius );
     //
     noStroke();
     {
@@ -102,7 +102,7 @@ void draw() {
     noStroke();
   }
 
-  ellipse( measleX, measleY, measleDiameter, measleDiameter );
+  ellipse( measleX, measleY, measleDiameter, measleDiameter);
   stroke(1);
   fill(resetColour);
   //
