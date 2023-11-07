@@ -8,12 +8,13 @@ float mouthX1, mouthY1, mouthX2, mouthY2, mouthOpen, mouthReset;
 float measleX, measleY, measleDiameter, measleRadius;
 float button1X, button1Y, button2X, button2Y, button3X, button3Y, button4X, button4Y, buttonSide;
 color resetColour = #FFFFFF, black =#000000, red = #e81123, green = #18C636, buttonGrey = #464a4e;
-Boolean measles = false;
+Boolean measlesOn= false;
 int size, measlesSize = 20;
 Boolean measlesControl = false;
-Boolean nightMode = false;
+//Boolean nightMode = false;
 String start="Start", stop="Stop", quit="X", restart="Restart";
 PFont defaultFont;
+color hoverOverColour=resetColour;
 //
 void setup() {
   fullScreen();
@@ -80,23 +81,37 @@ void setup() {
 //
 void draw() {
   //text code
-  color hoverOverColour=resetColour;
   if ( mouseX>button1X && mouseX<button1X+buttonSide && mouseY>button1Y && mouseY<button1Y+buttonSide ) { //Buton 1
     hoverOverColour = buttonGrey;
+    fill( hoverOverColour );
+    rect( button1X, button1Y, buttonSide, buttonSide );
+    fill( resetColour );
+    //
   } else if ( mouseX>button2X && mouseX<button2X+buttonSide && mouseY>button2Y && mouseY<button2Y+buttonSide ) { //Button 2
     hoverOverColour = buttonGrey;
+    fill( hoverOverColour );
+    rect( button2X, button2Y, buttonSide, buttonSide );
+    fill( resetColour );
+    //
   } else if ( mouseX>button3X && mouseX<button3X+buttonSide && mouseY>button3Y && mouseY<button3Y+buttonSide ) { //Button 3
     hoverOverColour = buttonGrey;
-      } else if ( mouseX>button4X && mouseX<button4X+buttonSide && mouseY>button4Y && mouseY<button4Y+buttonSide ) { //Button 4
+    fill( hoverOverColour );
+    rect(button3X, button3Y, buttonSide, buttonSide); //quit
+    fill( resetColour );
+    //
+  } else if ( mouseX>button4X && mouseX<button4X+buttonSide && mouseY>button4Y && mouseY<button4Y+buttonSide ) { //Button 4
     hoverOverColour = buttonGrey;
+    fill( hoverOverColour );
+    rect(button4X, button4Y, buttonSide, buttonSide); //restart
+    fill( resetColour );
+    //
   } else { //No Buttons
     fill( resetColour );
+    rect(button1X, button1Y, buttonSide, buttonSide); //start
+    rect(button2X, button2Y, buttonSide, buttonSide); //stop
+    rect(button3X, button3Y, buttonSide, buttonSide); //quit
+    rect(button4X, button4Y, buttonSide, buttonSide); //restart
   }
-  rect(button1X, button1Y, buttonSide, buttonSide);
-  rect(button2X, button2Y, buttonSide, buttonSide);
-  rect(button3X, button3Y, buttonSide, buttonSide);
-  rect(button4X, button4Y, buttonSide, buttonSide);
-  fill( resetColour );
   //
   int size = 50;
   textAlign(CENTER, CENTER);
@@ -124,7 +139,6 @@ void draw() {
   //
   //
   color mealseColour = color(255, random(0, 84), random(0, 103));
-  if (measles==true) {
     fill(mealseColour);
     measleDiameter = random( smallerDimension*1/100, smallerDimension*1/measlesSize );
     measleRadius = measleDiameter/2;
@@ -144,44 +158,44 @@ void draw() {
         //Empty ELSE
       }
     }
-  } else {
-    fill(mealseColour);
-    noStroke();
-  }
 
-  ellipse( measleX, measleY, measleDiameter, measleDiameter);
+  if ( measlesOn==true ) ellipse( measleX, measleY, measleDiameter, measleDiameter);
   stroke(1);
   fill(resetColour);
   //
 } //End draw
 //
 void keyPressed() {
-  if (key == 'n' || key=='N' ) {
-    if (nightMode==true) {
-      nightMode = false;
-    } else {
-      nightMode = true;
-    }
-  }
+  /**
+   if (key == 'n' || key=='N' ) {
+   if (nightMode==true) {
+   nightMode = false;
+   } else {
+   nightMode = true;
+   }
+   }
+   
+  /**/
 
-
-  if (key == 'p' || key=='P' ) {
-    if (measles==true) {  //Nightmode, basic control is Boolean
-      measles = false;
-    } else {
-      measles = true;
-    }
-  }
+  //
   if (key == CODED && keyCode == UP || keyCode == DOWN ) {
     measlesControl = true;
     if (key == CODED && keyCode == UP) measlesSize--;
     if (key == CODED && keyCode == DOWN) measlesSize++ ;
   }
+  //
+  if (keyCode == ENTER) measlesOn=true; //START
+  if (keyCode== BACKSPACE ) measlesOn=false; //STOP
+  if (keyCode== ESC ) exit(); //QUIT
+  if (key==' ' ) println ("Restart"); //RESTART //SPACEBAR
+  //
 } //End keyPressed
 //
 void mousePressed() {
-  if ( mouseX>button3X && mouseX<button3X+buttonSide && mouseY>button3Y && mouseY<button3Y+buttonSide ) exit();
-  //
+  if (mouseX>button1X && mouseX<button1X+buttonSide && mouseY>button1Y && mouseY<button1Y+buttonSide )measlesOn=true;
+  if (mouseX>button2X && mouseX<button2X+buttonSide && mouseY>button2Y && mouseY<button2Y+buttonSide ) measlesOn=false;
+  if (mouseX>button3X && mouseX<button3X+buttonSide && mouseY>button3Y && mouseY<button3Y+buttonSide ) exit();
+  if (mouseX>button4X && mouseX<button4X+buttonSide && mouseY>button4Y && mouseY<button4Y+buttonSide ) println("Restart");
 } //End mousePressed
 //
 //End MAIN Program
