@@ -94,7 +94,7 @@ void draw() {
     fill( resetColour );
     //
   } else if ( mouseX>button3X && mouseX<button3X+buttonSide && mouseY>button3Y && mouseY<button3Y+buttonSide ) { //Button 3
-    hoverOverColour = buttonGrey;
+    hoverOverColour = red;
     fill( hoverOverColour );
     rect(button3X, button3Y, buttonSide, buttonSide); //quit
     fill( resetColour );
@@ -139,27 +139,30 @@ void draw() {
   //
   //
   color mealseColour = color(255, random(0, 84), random(0, 103));
-    fill(mealseColour);
-    measleDiameter = random( smallerDimension*1/100, smallerDimension*1/measlesSize );
-    measleRadius = measleDiameter/2;
-    measleX = random( backgroundX+(measleRadius), (backgroundWidth+backgroundX)-measleRadius);
-    while (measleX < button1X+buttonSide) measleX = random( backgroundX+(measleRadius), (backgroundWidth+backgroundX)-measleRadius);
-    //
-    measleY = random(backgroundY+(measleRadius), (backgroundHeight+backgroundY)-measleRadius );
-    while (measleY < button1Y+buttonSide) measleY = random(backgroundY+(measleRadius), (backgroundHeight+backgroundY)-measleRadius );
-    //
-    noStroke();
-    {
-      if ( measlesSize<15  ) {
-        measlesSize=15;
-      } else if (measlesSize>30) {
-        measlesSize=30;
-      } else {
-        //Empty ELSE
-      }
+  fill(mealseColour);
+  measleDiameter = random( smallerDimension*1/100, smallerDimension*1/measlesSize );
+  measleRadius = measleDiameter/2;
+  measleX = random( backgroundX+(measleRadius), (backgroundWidth+backgroundX)-measleRadius);
+  measleY = random(backgroundY+(measleRadius), (backgroundHeight+backgroundY)-measleRadius );
+  //while (measleX < button1X+buttonSide) measleX = random( backgroundX+(measleRadius), (backgroundWidth+backgroundX)-measleRadius);
+  //while (measleY < button1Y+buttonSide) measleY = random(backgroundY+(measleRadius), (backgroundHeight+backgroundY)-measleRadius );
+  //
+  noStroke();
+  if ( ((measleX-faceX)*(measleX-faceX))+((measleY-faceY)*(measleY-faceY)) < sq( ((faceDiameter/2)-(measleRadius)) ) ) { //Measle on Circle
+    if ( measlesOn==true ) ellipse( measleX, measleY, measleDiameter, measleDiameter );
+    fill(resetColour);
+  } //  END Measle on Circle
+  //
+  {
+    if ( measlesSize<15  ) {
+      measlesSize=15;
+    } else if (measlesSize>30) {
+      measlesSize=30;
+    } else {
+      //Empty ELSE
     }
+  }
 
-  if ( measlesOn==true ) ellipse( measleX, measleY, measleDiameter, measleDiameter);
   stroke(1);
   fill(resetColour);
   //
