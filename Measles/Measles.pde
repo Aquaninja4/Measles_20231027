@@ -3,7 +3,7 @@ int appWidth, appHeight, smallerDimension;
 float faceX, faceY, faceDiameter;
 float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
 float leftEyeX, leftEyeY, rightEyeX, rightEyeY, eyeDiameter;
-float noseX1, noseY1, noseX2, noseY2, noseX3, noseY3;
+float noseX1, noseY1, noseX2, noseY2, noseX3, nose3YLandscape,nose3YPortrait, smallerNose , noseY3;
 float mouthX1, mouthY1, mouthX2, mouthY2, mouthOpen, mouthReset;
 float measleX, measleY, measleDiameter, measleRadius;
 float button1X, button1Y, button2X, button2Y, button3X, button3Y, button4X, button4Y, buttonSide;
@@ -48,7 +48,10 @@ void setup() {
   noseX2 = faceX;
   noseY2 = faceY;
   noseX3 = backgroundWidth+backgroundX;
-  noseY3 = leftEyeX;
+  nose3YPortrait = leftEyeX*2.7;
+  nose3YLandscape = faceY+leftEyeX;
+  smallerNose = ( appHeight >= appWidth) ? nose3YLandscape : nose3YPortrait;
+  noseY3 = smallerNose wasdwasd;
   //
   mouthX1 = faceX;
   mouthY1 = backgroundY+smallerDimension*3/4;
