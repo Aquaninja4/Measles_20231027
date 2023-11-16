@@ -65,6 +65,13 @@ void setup() {
   //
   //
   //DIVs
+    if (splashScreen==false) {
+    beginShape(); //processing.org/reference/beginShape_.html
+    vertex(splashScreenX, splashScreenWidth);
+    vertex(splashScreenX, splashScreenHeight);
+    vertex(splashScreenY, splashScreenWidth);
+    vertex(splashScreenY, splashScreenHeight);
+  } else if (splashScreen==true) endShape();
   rect(backgroundX, backgroundY, backgroundWidth, backgroundHeight);
   ellipse( faceX, faceY, faceDiameter, faceDiameter );
   buttonSide = smallerDimension/2-sqrt(sq(smallerDimension/2)/2);
@@ -76,22 +83,23 @@ void setup() {
   button3Y = backgroundY+faceDiameter-buttonSide;
   button4X = button1X;
   button4Y = backgroundY+faceDiameter-buttonSide;
+  //
   rect(button1X, button1Y, buttonSide, buttonSide);
   rect(button2X, button2Y, buttonSide, buttonSide);
   rect(button3X, button3Y, buttonSide, buttonSide);
   rect(button4X, button4Y, buttonSide, buttonSide);
   //
-  defaultFont = createFont("Georgia", 50);
-} //End setup
-//
-void draw() {
-  if (splashScreen==false) {
+    if (splashScreen==false) {
     beginShape(); //processing.org/reference/beginShape_.html
     vertex(splashScreenX, splashScreenWidth);
     vertex(splashScreenX, splashScreenHeight);
     vertex(splashScreenY, splashScreenWidth);
     vertex(splashScreenY, splashScreenHeight);
   } else if (splashScreen==true) endShape();
+  defaultFont = createFont("Georgia", 50);
+} //End setup
+//
+void draw() {
   if (splashScreen==true) mealsesProgram();
 } //End draw
 //
