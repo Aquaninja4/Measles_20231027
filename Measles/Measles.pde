@@ -3,11 +3,11 @@ int appWidth, appHeight, smallerDimension;
 float faceX, faceY, faceDiameter;
 float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
 float leftEyeX, leftEyeY, rightEyeX, rightEyeY, eyeDiameter;
-float noseX1, noseY1, noseX2, noseY2, noseX3, nose3YLandscape,nose3YPortrait, smallerNose , noseY3;
+float noseX1, noseY1, noseX2, noseY2, noseX3, nose3YLandscape, nose3YPortrait, noseY3;
 float mouthX1, mouthY1, mouthX2, mouthY2, mouthOpen, mouthReset;
 float measleX, measleY, measleDiameter, measleRadius;
 float button1X, button1Y, button2X, button2Y, button3X, button3Y, button4X, button4Y, buttonSide;
-float splashScreenX, splashScreenY, splashScreenWidth, splashScreenHeight;
+float splashScreenX1, splashScreenY1, splashScreenX2, splashScreenY2 ;
 color resetColour = #FFFFFF, black =#000000, red = #e81123, green = #18C636, buttonGrey = #464a4e;
 Boolean measlesOn= false;
 int size, measlesSize = 20;
@@ -48,10 +48,9 @@ void setup() {
   noseX2 = faceX;
   noseY2 = faceY;
   noseX3 = backgroundWidth+backgroundX;
-  nose3YPortrait = leftEyeX*2.7;
+  nose3YPortrait = faceY+leftEyeY;
   nose3YLandscape = faceY+leftEyeX;
-  smallerNose = ( appHeight >= appWidth) ? nose3YLandscape : nose3YPortrait;
-  noseY3 = smallerNose wasdwasd;
+  noseY3 = ( appHeight >= appWidth) ? nose3YLandscape : nose3YPortrait ;
   //
   mouthX1 = faceX;
   mouthY1 = backgroundY+smallerDimension*3/4;
@@ -61,22 +60,13 @@ void setup() {
   mouthOpen = smallerDimension*1/10;
   mouthReset = smallerDimension/smallerDimension;
   //
-  splashScreenX = appWidth*0;
-  splashScreenY =  appHeight*0;
-  splashScreenWidth = appWidth-1;
-  splashScreenHeight = appHeight-1;
+  splashScreenX1 = backgroundX;
+  splashScreenY1=  backgroundY;
+  splashScreenX2 = backgroundWidth;
+  splashScreenY2 = backgroundHeight;
   //
   //
   //DIVs
-    if (splashScreen==false) {
-    beginShape(); //processing.org/reference/beginShape_.html
-    vertex(splashScreenX, splashScreenWidth);
-    vertex(splashScreenX, splashScreenHeight);
-    vertex(splashScreenY, splashScreenWidth);
-    vertex(splashScreenY, splashScreenHeight);
-  } else if (splashScreen==true) endShape();
-  rect(backgroundX, backgroundY, backgroundWidth, backgroundHeight);
-  ellipse( faceX, faceY, faceDiameter, faceDiameter );
   buttonSide = smallerDimension/2-sqrt(sq(smallerDimension/2)/2);
   button1X = backgroundX;
   button1Y = backgroundY;
@@ -86,20 +76,28 @@ void setup() {
   button3Y = backgroundY+faceDiameter-buttonSide;
   button4X = button1X;
   button4Y = backgroundY+faceDiameter-buttonSide;
-  //
-  rect(button1X, button1Y, buttonSide, buttonSide);
-  rect(button2X, button2Y, buttonSide, buttonSide);
-  rect(button3X, button3Y, buttonSide, buttonSide);
-  rect(button4X, button4Y, buttonSide, buttonSide);
-  //
-    if (splashScreen==false) {
-    beginShape(); //processing.org/reference/beginShape_.html
-    vertex(splashScreenX, splashScreenWidth);
-    vertex(splashScreenX, splashScreenHeight);
-    vertex(splashScreenY, splashScreenWidth);
-    vertex(splashScreenY, splashScreenHeight);
-  } else if (splashScreen==true) endShape();
   defaultFont = createFont("Georgia", 50);
+  //
+
+  //
+  if (splashScreen==false) {
+    beginShape(); //processing.org/reference/beginShape_.html
+    vertex(splashScreenX1, splashScreenY1 );
+    vertex(splashScreenX1, splashScreenY2);
+    vertex(splashScreenX2, splashScreenY1);
+    vertex(splashScreenX2, splashScreenY2);
+  } else if (splashScreen==true) {
+    endShape();
+    rect(button1X, button1Y, buttonSide, buttonSide);
+    rect(button2X, button2Y, buttonSide, buttonSide);
+    rect(button3X, button3Y, buttonSide, buttonSide);
+    rect(button4X, button4Y, buttonSide, buttonSide);
+  }
+  rect(backgroundX, backgroundY, backgroundWidth, backgroundHeight);
+  ellipse( faceX, faceY, faceDiameter, faceDiameter);
+  //
+
+  //
 } //End setup
 //
 void draw() {
@@ -133,12 +131,16 @@ void keyPressed() {
 } //End keyPressed
 //
 void mousePressed() {
-  if (splashScreen=true);
+  //rect(splashScreenX1,splashScreenY1,splashScreenX2,splashScreenY2);
   //
-  if (mouseX>button1X && mouseX<button1X+buttonSide && mouseY>button1Y && mouseY<button1Y+buttonSide )measlesOn=true;
-  if (mouseX>button2X && mouseX<button2X+buttonSide && mouseY>button2Y && mouseY<button2Y+buttonSide ) measlesOn=false;
-  if (mouseX>button3X && mouseX<button3X+buttonSide && mouseY>button3Y && mouseY<button3Y+buttonSide ) exit();
-  if (mouseX>button4X && mouseX<button4X+buttonSide && mouseY>button4Y && mouseY<button4Y+buttonSide ) println("Restart");
+  //if (mouseX>splashScreenX1 && mouseX<splashScreenX1+splashScreenX2 && mouseY>splashScreenY1 && mouseY<splashScreenY1+splashScreenY2)splashScreen=true;
+  if (splashScreen=true) {
+    if (mouseX>button1X && mouseX<button1X+buttonSide && mouseY>button1Y && mouseY<button1Y+buttonSide )measlesOn=true;
+    if (mouseX>button2X && mouseX<button2X+buttonSide && mouseY>button2Y && mouseY<button2Y+buttonSide ) measlesOn=false;
+    if (mouseX>button3X && mouseX<button3X+buttonSide && mouseY>button3Y && mouseY<button3Y+buttonSide ) exit();
+    if (mouseX>button4X && mouseX<button4X+buttonSide && mouseY>button4Y && mouseY<button4Y+buttonSide ) println("Restart");
+  }
+  
 } //End mousePressed
 //
 //End MAIN Program
