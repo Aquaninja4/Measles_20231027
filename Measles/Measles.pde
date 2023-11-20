@@ -8,12 +8,12 @@ float mouthX1, mouthY1, mouthX2, mouthY2, mouthOpen, mouthReset;
 float measleX, measleY, measleDiameter, measleRadius;
 float button1X, button1Y, button2X, button2Y, button3X, button3Y, button4X, button4Y, buttonSide;
 float splashScreenX1, splashScreenY1, splashScreenX2, splashScreenY2 ;
-color resetColour = #FFFFFF, black =#000000, red = #e81123, green = #18C636, buttonGrey = #464a4e;
+color white = #FFFFFF, resetColour = #FFFFFF, black =#000000, red = #e81123, green = #18C636, buttonGrey = #464a4e;
 Boolean measlesOn= false;
 int size, measlesSize = 20;
 Boolean measlesControl = false, splashScreen = false;
 //Boolean nightMode = false;
-String start="Start", stop="Stop", quit="X", restart="Restart";
+String start="Start", stop="Stop", quit="X", restart="Restart", splashText="Click to begin";
 PFont defaultFont;
 color hoverOverColour=resetColour;
 //
@@ -93,10 +93,20 @@ void setup() {
     rect(button3X, button3Y, buttonSide, buttonSide);
     rect(button4X, button4Y, buttonSide, buttonSide);
   }
+  //rect(splashScreenX1,splashScreenY1,splashScreenX2,splashScreenY2);
   rect(backgroundX, backgroundY, backgroundWidth, backgroundHeight);
   ellipse( faceX, faceY, faceDiameter, faceDiameter);
   //
-
+/*
+  textAlign(CENTER, CENTER);
+  textFont(defaultFont, 100);
+  if (splashScreen==false) {
+    fill(white);
+  } else if (splashScreen==true) {
+    fill(black);
+  }
+  text(splashText, splashScreenX1, splashScreenY1, splashScreenX2, splashScreenY2);
+  */
   //
 } //End setup
 //
@@ -131,16 +141,10 @@ void keyPressed() {
 } //End keyPressed
 //
 void mousePressed() {
-  //rect(splashScreenX1,splashScreenY1,splashScreenX2,splashScreenY2);
   //
+  if (splashScreen==true) buttons();
+  splashScreen=true;
   //if (mouseX>splashScreenX1 && mouseX<splashScreenX1+splashScreenX2 && mouseY>splashScreenY1 && mouseY<splashScreenY1+splashScreenY2)splashScreen=true;
-  if (splashScreen=true) {
-    if (mouseX>button1X && mouseX<button1X+buttonSide && mouseY>button1Y && mouseY<button1Y+buttonSide )measlesOn=true;
-    if (mouseX>button2X && mouseX<button2X+buttonSide && mouseY>button2Y && mouseY<button2Y+buttonSide ) measlesOn=false;
-    if (mouseX>button3X && mouseX<button3X+buttonSide && mouseY>button3Y && mouseY<button3Y+buttonSide ) exit();
-    if (mouseX>button4X && mouseX<button4X+buttonSide && mouseY>button4Y && mouseY<button4Y+buttonSide ) println("Restart");
-  }
-  
 } //End mousePressed
 //
 //End MAIN Program

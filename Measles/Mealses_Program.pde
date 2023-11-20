@@ -1,4 +1,4 @@
-void mealsesProgram () { 
+void mealsesProgram () {
   //text code
   if ( mouseX>button1X && mouseX<button1X+buttonSide && mouseY>button1Y && mouseY<button1Y+buttonSide ) { //Buton 1
     hoverOverColour = buttonGrey;
@@ -85,4 +85,13 @@ void mealsesProgram () {
   stroke(1);
   fill(resetColour);
   //
+}
+void buttons () {
+  if (mouseX>button1X && mouseX<button1X+buttonSide && mouseY>button1Y && mouseY<button1Y+buttonSide )measlesOn=true;
+  if (mouseX>button2X && mouseX<button2X+buttonSide && mouseY>button2Y && mouseY<button2Y+buttonSide ) measlesOn=false;
+  if (mouseX>button3X && mouseX<button3X+buttonSide && mouseY>button3Y && mouseY<button3Y+buttonSide ) exit();
+  if (mouseX>button4X && mouseX<button4X+buttonSide && mouseY>button4Y && mouseY<button4Y+buttonSide ) {
+    println("Restart");
+    exit();
+  }
 }
