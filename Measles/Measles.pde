@@ -97,17 +97,6 @@ void setup() {
   rect(backgroundX, backgroundY, backgroundWidth, backgroundHeight);
   ellipse( faceX, faceY, faceDiameter, faceDiameter);
   //
-/*
-  textAlign(CENTER, CENTER);
-  textFont(defaultFont, 100);
-  if (splashScreen==false) {
-    fill(white);
-  } else if (splashScreen==true) {
-    fill(black);
-  }
-  text(splashText, splashScreenX1, splashScreenY1, splashScreenX2, splashScreenY2);
-  */
-  //
 } //End setup
 //
 void draw() {
@@ -115,7 +104,7 @@ void draw() {
 } //End draw
 //
 void keyPressed() {
-  /**
+  /*
    if (key == 'n' || key=='N' ) {
    if (nightMode==true) {
    nightMode = false;
@@ -124,7 +113,7 @@ void keyPressed() {
    }
    }
    
-  /**/
+  */
 
   //
   if (key == CODED && keyCode == UP || keyCode == DOWN ) {
